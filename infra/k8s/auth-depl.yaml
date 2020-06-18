@@ -9,7 +9,7 @@ spec:
       app: auth
   template:
     metadata:
-      lables:
+      labels:
         app: auth
     spec:
       containers:

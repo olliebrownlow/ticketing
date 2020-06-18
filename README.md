@@ -1,0 +1,21 @@
+## Ticketing web application with a microservices architecture
+
+Ticket selling website written in Typescript and using a microservices structure.
+
+## Tech stack
+
+- Docker
+- Kubernetes
+- Skaffold
+- Typescript 3.9.5
+- ts-node-dev 1.0.0-pre.49
+- Express 4.17.1
+
+## Getting started
+
+_You will need to be signed in to your Docker account and be running Docker and Kubernetes. In case you plan to make changes to the code, install Skaffold on your system for a better dev experience_
+
+- Clone this repository to the directory of your choice: `git clone https://github.com/olliebrownlow/ticketing.git`
+- cd into the directory: `cd ticketing`
+- Change any occurences in the yaml files of my Docker hub username to your own
+- Run Skaffold to start the Kubernetes cluster and deploy the app: `skaffold dev` (try `skaffold dev --trigger polling` if you find that Skaffold is not automatically redeploying after any code changes.)
