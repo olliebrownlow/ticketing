@@ -1,6 +1,8 @@
-## Ticketing web application with a microservices architecture
+# Ticketing web application with a microservices architecture
 
 Ticket selling website written in Typescript and using a microservices structure.
+
+Users can browse tickets for upcoming events, and can sign up to purchase those tickets or advertise to sell tickets they own but no longer want.
 
 ## Tech stack
 
@@ -13,7 +15,7 @@ Ticket selling website written in Typescript and using a microservices structure
 
 ## Getting started
 
-_Make sure to follow the [NGINX Ingress Controller installation guide](https://kubernetes.github.io/ingress-nginx/deploy/#provider-specific-steps) before running the following steps:_
+_Follow the [NGINX Ingress Controller installation guide](https://kubernetes.github.io/ingress-nginx/deploy/#provider-specific-steps) before running the following steps:_
 
 - In your text editor, open the hosts file on your computer (C:\Windows\System32\Drivers\etc\hosts on Windows or /etc/hosts on MacOS/Linux) and add this line to the end: 127.0.0.1 ticketing.dev. You may need to do this as an administrator. This will force your operating system to connect to itself, your local machine, every time you try to browse to ticketing.dev.
 
@@ -21,6 +23,47 @@ _You will need to be signed in to your Docker account and be running Docker and 
 
 - Clone this repository to the directory of your choice: `git clone https://github.com/olliebrownlow/ticketing.git`
 - cd into the directory: `cd ticketing`
-- Change any occurences in the yaml files of my Docker hub username to your own
+- Change any occurences in the yaml files of my personal Docker hub username to your own
 - Run Skaffold to start the Kubernetes cluster and deploy the app: `skaffold dev` (try `skaffold dev --trigger polling` if you find that Skaffold is not automatically redeploying after any code changes.)
 - Navigate to https://ticketing.dev/api/users/currentuser in a browser of your choice and you should be able to use the app. Note that if you experience a security warning, try again in a **Chrome** browser, click anywhere on the page and bypass the warning by typing "thisisunsafe".
+
+## Structure
+
+Eventually the app will make use of 4 resources, consisting of the indicated properties and types:
+
+- User
+  - email (string)
+  - password (string)
+- Ticket
+  - title (string)
+  - price (number)
+  - userId (Ref to User)
+  - orderId (Ref to Order)
+- Order
+  - userId (Ref to User)
+  - status (created/cancelled etc)
+  - ticketId (Ref to Ticket)
+  - expiresAt (Date)
+- Charge
+  - orderId (Ref to Order)
+  - status (Created/Failed etc)
+  - amount (number)
+  - stripeId (string)
+  - stripeRefundId (string)
+
+and utilise 5 services in a 1-2-1 mapping of the above plus one extra service - _expiration_ - to keep an eye on orders that are in creation, cancelling them if they are not completed within a designated amount of time (e.g. 15 minutes):
+
+- auth
+  - singup/signin/signout etc
+- tickets
+  - ticket creation/editing
+- orders
+  - order creation/editing
+- payments
+  - payments and payment success/failure
+- expiration
+  - watches order creation, payment failure/success
+
+The services will store data in a _mongodb_ database, except for expiration which will use _Redis_.
+
+The client app (front-end) will be written using _Next.js_, and the event bus that is used will make use of _NATS Streaming Server_. Finally, all reusable code will be written into it's own library called _common_.
