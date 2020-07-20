@@ -75,4 +75,4 @@ The client app (front-end) will be written using _Next.js_, and the event bus th
 
 Testing uses mongodb-memory-server, an in-memory database.
 
-To run the tests, navigate to the relevant service and run `npm test`.
+To run the tests, navigate to the relevant service and run `npm run test`.
