@@ -12,6 +12,7 @@ Users can browse tickets for upcoming events, and can sign up to purchase those 
 - Typescript 3.9.5
 - ts-node-dev 1.0.0-pre.49
 - Express 4.17.1
+- Jest 26.1.0
 
 ## Getting started
 
@@ -69,3 +70,9 @@ and utilise 5 services in a 1-2-1 mapping of the above plus one extra service - 
 The services will store data in a _mongodb_ database, except for expiration which will use _Redis_.
 
 The client app (front-end) will be written using _Next.js_, and the event bus that is used will make use of _NATS Streaming Server_. Finally, all reusable code will be written into it's own library called _common_.
+
+## Testing
+
+Testing uses mongodb-memory-server, an in-memory database.
+
+To run the tests, navigate to the relevant service and run `npm test`.
