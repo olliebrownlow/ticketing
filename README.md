@@ -12,7 +12,12 @@ Users can browse tickets for upcoming events, and can sign up to purchase those 
 - Typescript 3.9.5
 - ts-node-dev 1.0.0-pre.49
 - Express 4.17.1
+- Next 9.4.4
+- React 16.13.1
+- React-dom 16.3.1
+- Bootstrap 4.5.0
 - Jest 26.1.0
+- Supertest 4.0.2
 
 ## Getting started
 
