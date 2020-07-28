@@ -1,4 +1,4 @@
-import axios from "axios";
+import buildClient from "../api/build-client";
 
 const LandingPage = ({ currentUser }) => {
   console.log(currentUser);
@@ -7,29 +7,11 @@ const LandingPage = ({ currentUser }) => {
   return <h1>Landing Page</h1>;
 };
 
-LandingPage.getInitialProps = async ({ req }) => {
-  if (typeof window === "undefined") {
-    // we are on the server
-    // requests should be made to http://SERVICENAME.NAMESPACE.svc.cluster.local
-    // this utilises the ingress-nginx-controller namespace not currently available on minikube
-    // below is the workaround
-    const { data } = await axios.get(
-      "http://auth-srv:3000/api/users/currentuser",
-      {
-        headers: req.headers,
-      }
-    );
+LandingPage.getInitialProps = async (context) => {
+  const client = buildClient(context);
+  const { data } = await client.get("/api/users/currentuser");
 
-    return data;
-  } else {
-    // we are on the browser
-    // requests can be made with a base url of ""
-    const { data } = await axios.get("/api/users/currentuser");
-
-    return data;
-  }
-
-  return {};
+  return data;
 };
 
 export default LandingPage;
