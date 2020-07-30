@@ -33,7 +33,7 @@ _You will need to be signed in to your Docker account and be running Docker and 
 - Change any occurences in the yaml files of my personal Docker hub username to your own
 - ( If using minikube, run `minkube start`)
 - Run Skaffold to start the Kubernetes cluster and deploy the app: `skaffold dev` (try `skaffold dev --trigger polling` if you find that Skaffold is not automatically redeploying after any code changes.)
-- Navigate to https://ticketing.dev/api/users/currentuser in a browser of your choice and you should be able to use the app. Note that if you experience a security warning, try again in a **Chrome** browser, click anywhere on the page and bypass the warning by typing "thisisunsafe". (Further note if using minikube: if you are getting a "This site can’t be reached ticketing.dev refused to connect" message, in a separate console run `minikube addons enable ingress`
+- Navigate to https://ticketing.dev in a browser of your choice and you should be able to use the app. Note that if you experience a security warning, try again in a **Chrome** browser, click anywhere on the page and bypass the warning by typing "thisisunsafe". (Further note if using minikube: if you are getting a "This site can’t be reached ticketing.dev refused to connect" message, in a separate console run `minikube addons enable ingress`
 
 ## Structure
 
