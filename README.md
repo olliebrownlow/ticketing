@@ -74,7 +74,9 @@ and utilise 5 services in a 1-2-1 mapping of the above plus one extra service - 
 
 The services will store data in a _mongodb_ database, except for expiration which will use _Redis_.
 
-The client app (front-end) will be written using _Next.js_, and the event bus that is used will make use of _NATS Streaming Server_. Finally, all reusable code will be written into it's own library called _common_.
+The client app (front-end) will be written using _Next.js_, and the event bus that is used will make use of _NATS Streaming Server_.
+
+Finally, all reusable code will be written into it's own library called _common_. _common_ is published to [npmjs.com](https://www.npmjs.com/) and pulled in as a dependency into the services that make use of it. It can be found [here](https://www.npmjs.com/package/@osbticketing/common) or by searching for "osbticketing" in [npmjs.com](https://www.npmjs.com/).
 
 ## Testing
 
