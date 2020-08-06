@@ -37,19 +37,13 @@ afterAll(async () => {
   await mongoose.connection.close();
 });
 
+// Should not reach out to the auth service so need to build
+// a session to mimic authentication for tests
 global.signin = async () => {
-  const email = "test@test.com";
-  const password = "password";
-
-  const response = await request(app)
-    .post("/api/users/signup")
-    .send({
-      email,
-      password,
-    })
-    .expect(201);
-
-  const cookie = response.get("Set-Cookie");
-
-  return cookie;
+  // Build a JWT payload. { id,email }
+  // Create the JWT
+  // Build session object { jwt:MY_JWT }
+  // Turn that session into JSON
+  // Take JSON and encode it as base64
+  // Return a string that's the cookie with the encoded data
 };
