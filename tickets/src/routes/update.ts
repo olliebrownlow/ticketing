@@ -20,6 +20,10 @@ router.put(
       throw new NotFoundError();
     }
 
+    if (ticket.userId !== req.currentUser!.id) {
+      throw new NotAuthorisedError();
+    }
+
     res.send(ticket);
   }
 );
