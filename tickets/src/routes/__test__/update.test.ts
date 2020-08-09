@@ -68,16 +68,7 @@ it("returns a 400 if the user provides an invalid title or price", async () => {
     .put(`/api/tickets/${response.body.id}`)
     .set("Cookie", cookie)
     .send({
-      title: "pwjejw",
-      price: 20,
-    })
-    .expect(400);
-
-  await request(app)
-    .put(`/api/tickets/${response.body.id}`)
-    .set("Cookie", cookie)
-    .send({
-      title: "aslkdfj",
+      title: "aslkdfjjweuhro",
       price: -20,
     })
     .expect(400);
